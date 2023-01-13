@@ -21,6 +21,7 @@ let currentScore = 0;
 //This function will display the questions when the user clicks the start screen, in an unordered list//
 let questionSection = document.querySelector('#questionSection');
 let questionTitle = document.querySelector('#question-title');
+let choices = document.querySelector('#choices'); //This accesses the div Choices//
 
 function displayQuestions() {
 
@@ -29,7 +30,7 @@ function displayQuestions() {
     questionSection.style.display = 'block'; //This makes the question section visible//
     questionTitle.textContent = question[currentQuestion].questions; //This sets the H2 textContent to the value of the selected question//
 
-    let choices = document.querySelector('#choices'); //This accesses the div Choices//
+    // let choices = document.querySelector('#choices'); //This accesses the div Choices//
     answers = userQuestions[currentQuestion].answers; //This stores the answers of the current in a variable called answers
     console.log(answers);
     for (let i = 0; i < answers.length; i++) { //This loops through the answers and creates a button for each answer.
@@ -52,7 +53,7 @@ choices.addEventListener("click", function(e) {
         console.log(userQuestions[currentQuestion].correctAnswer);
         if (selectedAnswer === userQuestions[currentQuestion].correctAnswer){
             currentScore+= 10;
-            localStorage.setItem("Score", JSON.stringify(currentScore));
+            // localStorage.setItem("Score", JSON.stringify(currentScore));
             choices.textContent = '' //Setting the textContent to an empty string before running the displayQuestions again so that only new answers are displayed.
             currentQuestion++;
 
@@ -79,13 +80,14 @@ function endQuiz() { //This function hides the questions section and displays th
     quizEnded.style.display = 'block';
 }
 //This event listener takes the input from the user and sends their initials and scores to the highscore page when they press the submit btn.
-
 let initials = document.querySelector('#initials');
+
 submitBtn.addEventListener("click", function (event){
     event.preventDefault();
     let initial = initials.value;
-    localStorage.setItem("User", JSON.stringify(initial));
-
+    let newScore  = {name: initial, score: currentScore};
+    localStorage.setItem("User", JSON.stringify(newScore));
+    window.location.href = "highscores.html";
 });
 
 
