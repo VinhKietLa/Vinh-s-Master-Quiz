@@ -74,12 +74,16 @@ choices.addEventListener("click", function(e) {
 
 
 let quizEnded = document.querySelector('#end-screen');
-
-function endQuiz() {
+let submitBtn = document.querySelector('#submit');
+function endQuiz() { //This function hides the questions section and displays the highscore section
     questionSection.style.display = 'none';
     quizEnded.style.display = 'block';
     alert('quiz ended!');
 }
+//This event listener takes the input from the user and sends their initials and scores to the highscore page when they press the submit btn.
+submitBtn.addEventListener("submit", function (event){
+  
+});
 
 
 //This is a timer function to start when the user clicks 'Start Quiz' and hides the start-screen// 
