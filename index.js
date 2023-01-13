@@ -9,9 +9,11 @@
 //These are my questions
 let userQuestions = [
 
-{questions: "Which Pokemon did Ash start of his journey with?", answers: ["Bulbasaur", "Squirtle", "Charmander", "Pikachu"], correctAnswer: "Pikachu", dateState: "hidden"},
-{questions: "How many Harry Potter Movies are there?", answers: ["3", "5", "6", "8"], correctAnswer: "8", dateState:"hidden"},
-
+{questions: "Which Pokemon did Ash start of his journey with?", answers: ["Bulbasaur", "Squirtle", "Charmander", "Pikachu"], correctAnswer: "Pikachu"},
+{questions: "How many Harry Potter Movies are there?", answers: ["3", "5", "6", "8"], correctAnswer: "8"},
+{questions: "Who was the 1994 Fifa World Cup Winner?", answers: ["Brazil", "France", "Portugal", "Argentina"], correctAnswer: "Brazil"},
+{questions: "How many states are there in the America?", answers: ["45", "50", "65", "34"], correctAnswer: "50"},
+{questions: "Which planet is closest to the sun?", answers: ["Neptune", "Jupiter", "Earth", "Mercury"], correctAnswer: "Mercury"}
 ];
 
 //This is a counter to track the current question
@@ -59,7 +61,7 @@ choices.addEventListener("click", function(e) {
             currentQuestion++;
 
         } else {
-            timeLeft -= 10;
+            timeLeft -= 5;
             choices.textContent = ''
             currentQuestion++;
         } 
@@ -87,6 +89,10 @@ function endQuiz() { //This function hides the questions section and displays th
     if(outOfTime) {
         h2.textContent = 'Sorry you ran out of time!';
         finalScore.textContent = currentScore;
+    } else {
+        h2.textContent = 'Good job!';
+        finalScore.textContent = currentScore;
+
     }
 }
 //This event listener takes the input from the user and sends their initials and scores to the highscore page when they press the submit btn.
@@ -120,7 +126,7 @@ submitBtn.addEventListener("click", function (event){
 //This is a timer function to start when the user clicks 'Start Quiz' and hides the start-screen// 
 let startScreen = document.querySelector('#start-screen');
 let timer = document.querySelector('#time');
-let timeLeft = 5;
+let timeLeft = 31;
 
 function startQuizTimer() {
 startScreen.style.display = 'none';
