@@ -7,7 +7,7 @@
 
 
 //These are my questions
-let questions = [
+let userQuestions = [
 
 {questions: "Which Pokemon did Ash start of his journey with?", answers: ["Bulbasaur", "Squirtle", "Charmander", "Pikachu"], correctAnswer: "Pikachu"},
 {questions: "How many Harry Potter Movies are there?", answers: ["3", "5", "6", "8"], correctAnswer: "8"},
@@ -16,6 +16,27 @@ let questions = [
 
 //This is a counter to track the current question
 let currentQuestion = 0;
+
+
+//This function will display the questions when the user clicks the start screen, in an unordered list//
+
+function displayQuestions() {
+
+    for (let i = 0; i < userQuestions.length; i++) {
+
+        let question = userQuestions[i].questions;
+        console.log(question);
+    
+        
+    
+    
+    
+    }
+
+
+};
+
+displayQuestions();
 
 
 //This is a timer function to start when the user clicks 'Start Quiz' and hides the start-screen// 
@@ -38,8 +59,6 @@ let timerInterval = setInterval(function(){
 }
 
 //functions that execute when the user clicks start quiz button//
-
-
 function beginQuiz() {
     startQuizTimer();
 
