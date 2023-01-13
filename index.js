@@ -52,6 +52,7 @@ choices.addEventListener("click", function(e) {
         console.log(userQuestions[currentQuestion].correctAnswer);
         if (selectedAnswer === userQuestions[currentQuestion].correctAnswer){
             currentScore+= 10;
+            localStorage.setItem("Score", JSON.stringify(currentScore));
             choices.textContent = '' //Setting the textContent to an empty string before running the displayQuestions again so that only new answers are displayed.
             currentQuestion++;
 
@@ -83,6 +84,8 @@ let initials = document.querySelector('#initials');
 submitBtn.addEventListener("click", function (event){
     event.preventDefault();
     let initial = initials.value;
+    localStorage.setItem("User", JSON.stringify(initial));
+
 });
 
 
