@@ -52,13 +52,11 @@ choices.addEventListener("click", function(e) {
         console.log(userQuestions[currentQuestion].correctAnswer);
         if (selectedAnswer === userQuestions[currentQuestion].correctAnswer){
             currentScore+= 10;
-            alert('correct answer');
             choices.textContent = '' //Setting the textContent to an empty string before running the displayQuestions again so that only new answers are displayed.
             currentQuestion++;
 
         } else {
             timeLeft -= 10;
-            alert('incorrect answer');
             choices.textContent = ''
             currentQuestion++;
         } 
@@ -78,11 +76,13 @@ let submitBtn = document.querySelector('#submit');
 function endQuiz() { //This function hides the questions section and displays the highscore section
     questionSection.style.display = 'none';
     quizEnded.style.display = 'block';
-    alert('quiz ended!');
 }
 //This event listener takes the input from the user and sends their initials and scores to the highscore page when they press the submit btn.
-submitBtn.addEventListener("submit", function (event){
-  
+
+let initials = document.querySelector('#initials');
+submitBtn.addEventListener("click", function (event){
+    event.preventDefault();
+    let initial = initials.value;
 });
 
 
