@@ -17,6 +17,7 @@ let userQuestions = [
 //This is a counter to track the current question
 let currentQuestion = 0;
 let currentScore = 0;
+let outOfTime = false;
 
 //This function will display the questions when the user clicks the start screen, in an unordered list//
 let questionSection = document.querySelector('#questionSection');
@@ -74,10 +75,19 @@ choices.addEventListener("click", function(e) {
 
 
 let quizEnded = document.querySelector('#end-screen');
+let h2 = document.querySelector('#end-screen h2');
 let submitBtn = document.querySelector('#submit');
+let finalScore = document.querySelector('#final-score');
+console.log(quizEnded.firstChild.innerHTML);
+
 function endQuiz() { //This function hides the questions section and displays the highscore section
     questionSection.style.display = 'none';
     quizEnded.style.display = 'block';
+
+    if(outOfTime) {
+        h2.textContent = 'Sorry you ran out of time!';
+        finalScore.textContent = currentScore;
+    }
 }
 //This event listener takes the input from the user and sends their initials and scores to the highscore page when they press the submit btn.
 let initials = document.querySelector('#initials');
@@ -110,7 +120,7 @@ submitBtn.addEventListener("click", function (event){
 //This is a timer function to start when the user clicks 'Start Quiz' and hides the start-screen// 
 let startScreen = document.querySelector('#start-screen');
 let timer = document.querySelector('#time');
-let timeLeft = 30;
+let timeLeft = 5;
 
 function startQuizTimer() {
 startScreen.style.display = 'none';
@@ -120,8 +130,10 @@ let timerInterval = setInterval(function(){
     if(timeLeft === 0) {
         // Stops execution of action at set interval
         clearInterval(timerInterval);
+
         // Calls function to create and append image
-       
+        outOfTime = true;
+       endQuiz();
       }
     }, 1000);
 }
@@ -138,6 +150,16 @@ let startQuizBtn = document.querySelector('#start');
 startQuizBtn.addEventListener('click', beginQuiz);
 
 
+
+//Todo //
+
+// When the timer hits 0, the quiz needs to end, right now the timer hits 0 and stays on 0, the user should be taken to the All done! with a message that tells them why the game ended early. 
+
+//Update the home screen text to make it more personal//
+
+
+
+
 //index for the questions, data-index per question? store in variable?//
 
 
@@ -150,12 +172,6 @@ startQuizBtn.addEventListener('click', beginQuiz);
 
 //Add event listener to the start quiz button to start timer when the user clicks 'Start quiz'
 //Once they press start quiz, then we should show the first question//
-
-
-
-
-
-
 
 
 

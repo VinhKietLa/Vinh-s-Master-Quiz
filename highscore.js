@@ -40,4 +40,4 @@ function displayHighScores() {
 clearScores.addEventListener('click', function (){
 localStorage.clear();
 location.reload();
-})
+});
