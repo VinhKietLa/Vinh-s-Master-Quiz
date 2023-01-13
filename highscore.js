@@ -27,14 +27,11 @@ function displayHighScores() {
     }
 }
 
+if(localStorage.getItem("User") != null){
     displayHighScores();
-
-
-// if(localStorage.getItem("User") != undefined){
-//     displayHighScores();
-// } else {
-//     noScore.textContent = 'No scores to show =('
-// }
+} else {
+    noScore.textContent = 'No scores to show =('
+}
 
 
 clearScores.addEventListener('click', function (){
