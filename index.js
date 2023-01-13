@@ -27,51 +27,51 @@ let questionTitle = document.querySelector('#question-title');
 let choices = document.querySelector('#choices'); //This accesses the div Choices//
 
 function displayQuestions() {
-
-
+    
     let question = userQuestions; //This is the current question//
     questionSection.style.display = 'block'; //This makes the question section visible//
     questionTitle.textContent = question[currentQuestion].questions; //This sets the H2 textContent to the value of the selected question//
 
     // let choices = document.querySelector('#choices'); //This accesses the div Choices//
-    answers = userQuestions[currentQuestion].answers; //This stores the answers of the current in a variable called answers
+    let answers = userQuestions[currentQuestion].answers; //This stores the answers of the current in a variable called answers
     console.log(answers);
     for (let i = 0; i < answers.length; i++) { //This loops through the answers and creates a button for each answer.
        
         let answer = answers[i];
         let button = document.createElement('button');
         button.textContent = answer;
+        button.id = "UserChoice";
         console.log(answer);
         choices.appendChild(button);
-        console.log(choices.textContent);
-    }
-
-    // currentQuestion ++;//each time this function is called, this will increase the current question index.
-};
-
 //This function will listen to all the answers displayed and will add 10points to the correct score or deduct 10secs from the timer and then call the question function again for the next question once an answer is selected.
 
-choices.addEventListener("click", function(e) {
-        let selectedAnswer = e.target.textContent;
-        console.log(userQuestions[currentQuestion].correctAnswer);
-        if (selectedAnswer === userQuestions[currentQuestion].correctAnswer){
-            currentScore+= 10;
-            // localStorage.setItem("Score", JSON.stringify(currentScore));
-            choices.textContent = '' //Setting the textContent to an empty string before running the displayQuestions again so that only new answers are displayed.
-            currentQuestion++;
+    button.addEventListener("click", function(e) {
+        e.stopPropagation();
+            let selectedAnswer = e.target.textContent;
+            console.log(userQuestions[currentQuestion].correctAnswer);
+            if (selectedAnswer === userQuestions[currentQuestion].correctAnswer){
+                currentScore+= 10;
+                // localStorage.setItem("Score", JSON.stringify(currentScore));
+                choices.textContent = '' //Setting the textContent to an empty string before running the displayQuestions again so that only new answers are displayed.
+                currentQuestion++;
+    
+            } else {
+                timeLeft -= 5;
+                choices.textContent = ''
+                currentQuestion++;
+            } 
+            
+            if (currentQuestion === userQuestions.length) {
+                endQuiz();
+            } else {
+                displayQuestions();
+            }        
+    });
+};
+};
 
-        } else {
-            timeLeft -= 5;
-            choices.textContent = ''
-            currentQuestion++;
-        } 
-        
-        if (currentQuestion === userQuestions.length) {
-            endQuiz();
-        } else {
-            displayQuestions();
-        }        
-});
+
+
 
 //This function will run when the game has ended and will allow the user to submit their initials and after hitting submit they will be taken to the highscore page where they can clear highscore or go back to the quiz home page.
 
@@ -80,7 +80,6 @@ let quizEnded = document.querySelector('#end-screen');
 let h2 = document.querySelector('#end-screen h2');
 let submitBtn = document.querySelector('#submit');
 let finalScore = document.querySelector('#final-score');
-console.log(quizEnded.firstChild.innerHTML);
 
 function endQuiz() { //This function hides the questions section and displays the highscore section
     questionSection.style.display = 'none';
@@ -89,8 +88,13 @@ function endQuiz() { //This function hides the questions section and displays th
     if(outOfTime) {
         h2.textContent = 'Sorry you ran out of time!';
         finalScore.textContent = currentScore;
+
+    } else if (currentScore === 50){
+        h2.textContent = 'WOW, you answered all the questions correctly!';
+        finalScore.textContent = currentScore;
+
     } else {
-        h2.textContent = 'Good job!';
+        h2.textContent = 'Good Job!';
         finalScore.textContent = currentScore;
 
     }
@@ -118,7 +122,7 @@ submitBtn.addEventListener("click", function (event){
 
     }
     localStorage.setItem("Users", JSON.stringify(users));
-    // window.location.href = "highscores.html";
+    window.location.href = "highscores.html";
 });
 
 
@@ -126,17 +130,17 @@ submitBtn.addEventListener("click", function (event){
 //This is a timer function to start when the user clicks 'Start Quiz' and hides the start-screen// 
 let startScreen = document.querySelector('#start-screen');
 let timer = document.querySelector('#time');
-let timeLeft = 31;
+let timeLeft = 30;
 
 function startQuizTimer() {
 startScreen.style.display = 'none';
 let timerInterval = setInterval(function(){
     timeLeft--;
     timer.textContent = timeLeft;
-    if(timeLeft === 0) {
+    if(timeLeft <= 0) {
         // Stops execution of action at set interval
         clearInterval(timerInterval);
-
+        timer.textContent = 0;
         // Calls function to create and append image
         outOfTime = true;
        endQuiz();
