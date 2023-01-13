@@ -84,8 +84,10 @@ let initials = document.querySelector('#initials');
 
 submitBtn.addEventListener("click", function (event){
     event.preventDefault();
-    let initial = initials.value;
-    let newScore  = {name: initial, score: currentScore};
+    let checkUser = localStorage.getItem("Users");
+    let initial = initials.value; //this stores the users input in a variable//
+    let newScore  = {name: initial, score: currentScore};//this stores an object with the input name and score in a variable//
+
     localStorage.setItem("User", JSON.stringify(newScore));
     window.location.href = "highscores.html";
 });

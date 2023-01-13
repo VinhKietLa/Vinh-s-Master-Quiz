@@ -6,8 +6,10 @@ let noScore = document.querySelector('#noScores');
 function displayHighScores() {
 
     let storedUser = localStorage.getItem("User");
-    let user = JSON.parse(storedUser);
 
+    console.log(storedUser);
+    let user = JSON.parse(storedUser);
+    console.log(user);
     let message = (user.name + ' ' + '- ' + user.score);
 
     let li = document.createElement('li');
@@ -15,14 +17,16 @@ function displayHighScores() {
     li.textContent = message;
     
     highScores.appendChild(li);
-    isScores = true;
 }
 
-if(localStorage.getItem("User") != undefined){
     displayHighScores();
-} else {
-    noScore.textContent = 'No scores to show =('
-}
+
+
+// if(localStorage.getItem("User") != undefined){
+//     displayHighScores();
+// } else {
+//     noScore.textContent = 'No scores to show =('
+// }
 
 
 clearScores.addEventListener('click', function (){
