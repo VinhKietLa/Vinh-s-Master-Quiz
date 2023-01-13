@@ -39,11 +39,50 @@ function displayQuestions() {
         choices.appendChild(button);
     }
 
-    currentQuestion ++;//each time this function is called, this will increase the current question index.
-
+    // currentQuestion ++;//each time this function is called, this will increase the current question index.
 };
 
 //This function will listen to all the answers displayed and will add 10points to the correct score or deduct 10secs from the timer and then call the question function again for the next question once an answer is selected
+
+
+choices.addEventListener("click", function(e) {
+        console.log(e.target.textContent);
+        let selectedAnswer = e.target.textContent;
+        console.log(userQuestions[currentQuestion].correctAnswer);
+        if (selectedAnswer === userQuestions[currentQuestion].correctAnswer) {
+            currentScore++;
+            alert('correct answer');
+        } else {
+            timeLeft -= 1;
+            alert('incorrect answer');
+
+        }
+        currentQuestion++;
+        // if (currentQuestion === userQuestions.length) {
+        //     endQuiz();
+        // } else {
+            displayQuestions();
+        // }
+    
+});
+
+function checkAnswer(event) {
+    let selectedAnswer = e.target.textContent;
+    if (selectedAnswer === userQuestions[currentQuestion].correctAnswer) {
+        score++;
+    } else {
+        timeLeft -= 1;
+    }
+    currentQuestion++;
+    // if (currentQuestion === userQuestions.length) {
+    //     endQuiz();
+    // } else {
+    //     displayQuestions();
+    // }
+}
+
+
+
 
 
 //This is a timer function to start when the user clicks 'Start Quiz' and hides the start-screen// 
@@ -69,7 +108,6 @@ let timerInterval = setInterval(function(){
 function beginQuiz() {
     startQuizTimer();
     displayQuestions();
-
 }
 
 //Start Quiz Button//
