@@ -23,20 +23,23 @@ let questionSection = document.querySelector('#questionSection');
 let questionTitle = document.querySelector('#question-title');
 
 function displayQuestions() {
+
+
     let question = userQuestions; //This is the current question//
     questionSection.style.display = 'block'; //This makes the question section visible//
     questionTitle.textContent = question[currentQuestion].questions; //This sets the H2 textContent to the value of the selected question//
 
     let choices = document.querySelector('#choices'); //This accesses the div Choices//
-    let answers = userQuestions[currentQuestion].answers; //This stores the answers of the current in a variable called answers
+    answers = userQuestions[currentQuestion].answers; //This stores the answers of the current in a variable called answers
     console.log(answers);
-
     for (let i = 0; i < answers.length; i++) { //This loops through the answers and creates a button for each answer.
+       
         let answer = answers[i];
         let button = document.createElement('button');
         button.textContent = answer;
         console.log(answer);
         choices.appendChild(button);
+        console.log(choices.textContent);
     }
 
     // currentQuestion ++;//each time this function is called, this will increase the current question index.
@@ -50,12 +53,13 @@ choices.addEventListener("click", function(e) {
         let selectedAnswer = e.target.textContent;
         console.log(userQuestions[currentQuestion].correctAnswer);
         if (selectedAnswer === userQuestions[currentQuestion].correctAnswer) {
-            currentScore++;
+            currentScore+= 10;
             alert('correct answer');
+            choices.textContent = '' //Setting the textContent to an empty string before running the displayQuestions again so that only new answers are displayed.
         } else {
             timeLeft -= 1;
             alert('incorrect answer');
-
+            choices.textContent = ''
         }
         currentQuestion++;
         // if (currentQuestion === userQuestions.length) {
