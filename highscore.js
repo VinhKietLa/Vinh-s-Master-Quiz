@@ -25,9 +25,9 @@ function displayHighScores() {
     
     highScores.appendChild(li);
     }
-}
+}''
 
-if(localStorage.getItem("User") != null){
+if(localStorage.getItem("User") != ''){
     displayHighScores();
 } else {
     noScore.textContent = 'No scores to show =('
