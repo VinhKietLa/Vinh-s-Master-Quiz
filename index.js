@@ -9,34 +9,41 @@
 //These are my questions
 let userQuestions = [
 
-{questions: "Which Pokemon did Ash start of his journey with?", answers: ["Bulbasaur", "Squirtle", "Charmander", "Pikachu"], correctAnswer: "Pikachu"},
-{questions: "How many Harry Potter Movies are there?", answers: ["3", "5", "6", "8"], correctAnswer: "8"},
+{questions: "Which Pokemon did Ash start of his journey with?", answers: ["Bulbasaur", "Squirtle", "Charmander", "Pikachu"], correctAnswer: "Pikachu", dateState: "hidden"},
+{questions: "How many Harry Potter Movies are there?", answers: ["3", "5", "6", "8"], correctAnswer: "8", dateState:"hidden"},
 
 ];
 
 //This is a counter to track the current question
 let currentQuestion = 0;
-
+let currentScore = 0;
 
 //This function will display the questions when the user clicks the start screen, in an unordered list//
+let questionSection = document.querySelector('#questionSection');
+let questionTitle = document.querySelector('#question-title');
 
 function displayQuestions() {
+    let question = userQuestions; //This is the current question//
+    questionSection.style.display = 'block'; //This makes the question section visible//
+    questionTitle.textContent = question[currentQuestion].questions; //This sets the H2 textContent to the value of the selected question//
 
-    for (let i = 0; i < userQuestions.length; i++) {
+    let choices = document.querySelector('#choices'); //This accesses the div Choices//
+    let answers = userQuestions[currentQuestion].answers; //This stores the answers of the current in a variable called answers
+    console.log(answers);
 
-        let question = userQuestions[i].questions;
-        console.log(question);
-    
-        
-    
-    
-    
+    for (let i = 0; i < answers.length; i++) { //This loops through the answers and creates a button for each answer.
+        let answer = answers[i];
+        let button = document.createElement('button');
+        button.textContent = answer;
+        console.log(answer);
+        choices.appendChild(button);
     }
 
+    currentQuestion ++;//each time this function is called, this will increase the current question index.
 
 };
 
-displayQuestions();
+//This function will listen to all the answers displayed and will add 10points to the correct score or deduct 10secs from the timer and then call the question function again for the next question once an answer is selected
 
 
 //This is a timer function to start when the user clicks 'Start Quiz' and hides the start-screen// 
@@ -53,7 +60,7 @@ let timerInterval = setInterval(function(){
         // Stops execution of action at set interval
         clearInterval(timerInterval);
         // Calls function to create and append image
-        sendMessage();
+       
       }
     }, 1000);
 }
@@ -61,6 +68,7 @@ let timerInterval = setInterval(function(){
 //functions that execute when the user clicks start quiz button//
 function beginQuiz() {
     startQuizTimer();
+    displayQuestions();
 
 }
 
