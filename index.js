@@ -45,48 +45,41 @@ function displayQuestions() {
     // currentQuestion ++;//each time this function is called, this will increase the current question index.
 };
 
-//This function will listen to all the answers displayed and will add 10points to the correct score or deduct 10secs from the timer and then call the question function again for the next question once an answer is selected
-
+//This function will listen to all the answers displayed and will add 10points to the correct score or deduct 10secs from the timer and then call the question function again for the next question once an answer is selected.
 
 choices.addEventListener("click", function(e) {
-        console.log(e.target.textContent);
         let selectedAnswer = e.target.textContent;
         console.log(userQuestions[currentQuestion].correctAnswer);
-        if (selectedAnswer === userQuestions[currentQuestion].correctAnswer) {
+        if (selectedAnswer === userQuestions[currentQuestion].correctAnswer){
             currentScore+= 10;
             alert('correct answer');
             choices.textContent = '' //Setting the textContent to an empty string before running the displayQuestions again so that only new answers are displayed.
+            currentQuestion++;
+
         } else {
-            timeLeft -= 1;
+            timeLeft -= 10;
             alert('incorrect answer');
             choices.textContent = ''
-        }
-        currentQuestion++;
-        // if (currentQuestion === userQuestions.length) {
-        //     endQuiz();
-        // } else {
+            currentQuestion++;
+        } 
+        
+        if (currentQuestion === userQuestions.length) {
+            endQuiz();
+        } else {
             displayQuestions();
-        // }
-    
+        }        
 });
 
-function checkAnswer(event) {
-    let selectedAnswer = e.target.textContent;
-    if (selectedAnswer === userQuestions[currentQuestion].correctAnswer) {
-        score++;
-    } else {
-        timeLeft -= 1;
-    }
-    currentQuestion++;
-    // if (currentQuestion === userQuestions.length) {
-    //     endQuiz();
-    // } else {
-    //     displayQuestions();
-    // }
+//This function will run when the game has ended and will allow the user to submit their initials and after hitting submit they will be taken to the highscore page where they can clear highscore or go back to the quiz home page.
+
+
+let quizEnded = document.querySelector('#end-screen');
+
+function endQuiz() {
+    questionSection.style.display = 'none';
+    quizEnded.style.display = 'block';
+    alert('quiz ended!');
 }
-
-
-
 
 
 //This is a timer function to start when the user clicks 'Start Quiz' and hides the start-screen// 
