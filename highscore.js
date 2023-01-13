@@ -9,14 +9,22 @@ function displayHighScores() {
 
     console.log(storedUser);
     let user = JSON.parse(storedUser);
+    console.log(user.length);
     console.log(user[0].name + ' ' + user[0].score);
     let message = (user.name + ' ' + '- ' + user.score);
+
+   
+
+    for (let i = 0; i < user.length; i++) {
+
+    let message = user[i].name + ' ' + user[i].score
 
     let li = document.createElement('li');
 
     li.textContent = message;
     
     highScores.appendChild(li);
+    }
 }
 
     displayHighScores();
