@@ -84,13 +84,27 @@ let initials = document.querySelector('#initials');
 
 submitBtn.addEventListener("click", function (event){
     event.preventDefault();
-    let checkUser = localStorage.getItem("Users");
-    let initial = initials.value; //this stores the users input in a variable//
-    let newScore  = {name: initial, score: currentScore};//this stores an object with the input name and score in a variable//
+    let initial = initials.value;
+    let newUser  = {name: initial, score: currentScore};
 
-    localStorage.setItem("User", JSON.stringify(newScore));
-    window.location.href = "highscores.html";
+    let users = localStorage.getItem("Users");
+
+    console.log(users);
+    if (users) {
+        users = JSON.parse(users);
+        console.log(users);
+        users.push(newUser);
+        console.log(users);
+
+    } else {
+        users = [newUser];
+        console.log(users);
+
+    }
+    localStorage.setItem("Users", JSON.stringify(users));
+    // window.location.href = "highscores.html";
 });
+
 
 
 //This is a timer function to start when the user clicks 'Start Quiz' and hides the start-screen// 

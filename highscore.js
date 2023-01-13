@@ -5,11 +5,11 @@ let noScore = document.querySelector('#noScores');
 //This function will display the user initials and scores//
 function displayHighScores() {
 
-    let storedUser = localStorage.getItem("User");
+    let storedUser = localStorage.getItem("Users");
 
     console.log(storedUser);
     let user = JSON.parse(storedUser);
-    console.log(user);
+    console.log(user[0].name + ' ' + user[0].score);
     let message = (user.name + ' ' + '- ' + user.score);
 
     let li = document.createElement('li');
