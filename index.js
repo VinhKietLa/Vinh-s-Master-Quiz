@@ -101,7 +101,6 @@ submitBtn.addEventListener("click", function (event){
 
     } else {
         users = [newUser]; //If there are no existing items callled user, then we create a new array as the user item.
-        console.log(users);
 
     }
     localStorage.setItem("Users", JSON.stringify(users));//The array is then turned into a string so that it can be added to localstorage using JSON.stringify.
