@@ -10,7 +10,7 @@ let userQuestions = [
 
 let currentQuestion = 0;//This is a counter to track the current question//
 let currentScore = 0; //This tracks the users current score and will increase if the user gets the question right.//
-let outOfTime = false; // This boolean will turn on and will display the user will the appropriate message if they run out of time//
+let outOfTime = false; // This boolean will turn on and will display the user with the appropriate message if they run out of time//
 
 //This function will display the questions when the user clicks the start screen and will display them as button elements//
 let questionSection = document.querySelector('#questionSection');
